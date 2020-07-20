@@ -1,1 +1,44 @@
-home page {{rows}}
+<div class="container" style="padding-top:20%">
+  <div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <p>hello world</p>
+
+      <input id="name" placeholder="Name"><br>
+
+      <input id="amount" type="number" placeholder="Spend amount" step="0.01" min="0">
+
+      <select id="category"></select><br>
+
+      <input id="description" placeholder="Description"><br>
+
+      <input id="date" type="date"><br>
+
+      <button type="button" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="col-sm"></div>
+  </div>
+</div>
+
+<script>
+  // Set today's date
+  let myDate = document.querySelector('#date');
+  let today = new Date();
+  myDate.value = today.toISOString().substr(0, 10);
+
+  // GET categories
+  axios.get('http://localhost:3000/api/get-categories')
+    .then((res) => {
+      res.data.forEach(category => {
+        let option = document.createElement("option");
+        option.text = category.NAME;
+        option.value = category.ID;
+        let select = document.querySelector("#category");
+        select.appendChild(option);
+      });
+    })
+    .catch((err) => {
+      console.log(err)
+      {{!-- resultElement.innerHTML = generateErrorHTMLOutput(err); --}}
+    }); 
+</script>

@@ -5,7 +5,7 @@ routes.use('/api', require('./api'));
  * Home page
  */
 routes.get('/', (req, res) => {
-  res.render('home', {rows: ['FOOD', 'GAS']});
+  res.render('home');
 });
 
 /**
