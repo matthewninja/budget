@@ -1,23 +1,17 @@
-<div class="container" style="padding-top:20%">
-  <div class="row">
-    <div class="col-sm"></div>
-    <div class="col-sm">
-      <p class="hello">hello world</p>
+<div class="center">
+  <h1>Spend 💰</h1>
 
-      <input id="name" placeholder="Name"><br>
+  <input id="name" placeholder="Name" class="transactionText"><br>
 
-      <input id="amount" type="number" placeholder="Spend amount" step="0.01" min="0">
+  <input id="amount" type="number" placeholder="Spend amount" step="0.01" min="0" class="transactionText"><br>
 
-      <select id="category"></select><br>
+  <input id="description" placeholder="Description" class="transactionText"><br>
 
-      <input id="description" placeholder="Description"><br>
+  <select id="category" class="transactionText"></select><br>
 
-      <input id="date" type="date"><br>
+  <input id="date" type="date" class="transactionText"><br>
 
-      <button type="button" class="btn btn-primary" onClick={addTransaction()}>Submit</button>
-    </div>
-    <div class="col-sm"></div>
-  </div>
+  <button type="button" class="submitButton" onClick={addTransaction()}>Submit</button>
 </div>
 
 <script>
@@ -39,7 +33,6 @@
     })
     .catch((err) => {
       console.log(err)
-      { { !--resultElement.innerHTML = generateErrorHTMLOutput(err); --} }
     });
 
   function addTransaction() {
@@ -57,7 +50,7 @@
       DESCRIPTION: document.querySelector('#description').value,
       DATE: document.querySelector('#date').value
     }
-    console.log('adding transaction ...\n', requestBody);
+
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
