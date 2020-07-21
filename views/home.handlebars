@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm"></div>
     <div class="col-sm">
-      <p>hello world</p>
+      <p class="hello">hello world</p>
 
       <input id="name" placeholder="Name"><br>
 
@@ -14,7 +14,7 @@
 
       <input id="date" type="date"><br>
 
-      <button type="button" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-primary" onClick={addTransaction()}>Submit</button>
     </div>
     <div class="col-sm"></div>
   </div>
@@ -40,5 +40,38 @@
     .catch((err) => {
       console.log(err)
       {{!-- resultElement.innerHTML = generateErrorHTMLOutput(err); --}}
-    }); 
+    });
+  
+  function addTransaction () {
+    let name = document.querySelector('#name').value;
+    let amount = document.querySelector('#amount').value;
+    let category = document.querySelector('#category').value;
+    let description = document.querySelector('#description').value;
+    let date = document.querySelector('#date').value;
+    
+
+    const requestBody = {
+      NAME: document.querySelector('#name').value,
+      CATEGORY: document.querySelector('#category').value,
+      AMOUNT: document.querySelector('#amount').value,
+      DESCRIPTION: document.querySelector('#description').value,
+      DATE: document.querySelector('#date').value
+    }
+    console.log('adding transaction ...\n', requestBody);
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+    let data = new URLSearchParams(requestBody).toString();
+    axios.post('http://localhost:3000/api/add-transaction', data, config)
+      .then((result) => {
+        // push snackbar success
+        console.log('success')
+      })
+      .catch((err) => {
+        // push snackbar failure
+        console.log('failure')
+      })
+  }
 </script>
