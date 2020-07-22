@@ -1,1 +1,41 @@
-analysis page
+<div class="center">
+  <h1>Analysis 📈</h1>
+  <p>List each category with the budget and current spend on each</p>
+  <p>An "exp" bar that fills up as I use the budget for the month</p>
+  <p>For each category, click it and it drops down to show each transaction</p>
+  <div class="progressBar">
+    <div class="progress"><span class="progressBarText">hello world</span></div>
+  </div>
+</div>
+
+<script>
+  // GET categories
+  function loadCategories() {
+    axios.get('http://localhost:3000/api/get-categories')
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
+  // GET transactions
+  function loadTransactions() {
+    axios.get('http://localhost:3000/api/get-transactions')
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
+
+  // Initialize analysis
+  function initialize() {
+    let categories = loadCategories();
+    let transactions = loadTransactions();
+  }
+
+  initialize();
+</script>

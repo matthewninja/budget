@@ -243,6 +243,26 @@ select {
   padding-bottom: 2rem;
 }
 
+.progressBar {
+  width: 100%;
+  background-color: lightblue;
+  border-radius: 13px;
+  border: 1px solid #000;
+  /* (height of inner div) / 2 + padding */
+  padding: 3px;
+}
+
+.progress {
+  background-color: green;
+  width: 40%;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.progressBarText {
+  padding-left: 1rem;
+}
+
 /* Small screens */
 @media only screen and (max-width: 600px) {
   .navbar {
