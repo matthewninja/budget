@@ -1,169 +1,87 @@
-<h1>Settings</h1>
+<div class="center">
+  <h1>Settings 🛠</h1>
+  <table id="settingsTable" class="settingsTable">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Budget</th>
+    </tr>
+  </table>
+</div>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-  aliqua. Diam sollicitudin tempor id eu. Blandit libero volutpat sed cras. Est pellentesque elit ullamcorper dignissim
-  cras tincidunt lobortis feugiat. Et odio pellentesque diam volutpat commodo. Amet aliquam id diam maecenas ultricies
-  mi eget mauris pharetra. Sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. Nam at lectus urna
-  duis convallis. Vel risus commodo viverra maecenas accumsan lacus. Placerat in egestas erat imperdiet sed euismod
-  nisi. Leo a diam sollicitudin tempor id eu nisl nunc. In cursus turpis massa tincidunt dui ut ornare lectus sit.
+<div id="addCategoryForm" style="display: none;">
+  <h1>Add a category 💵</h1>
+  <input id="name" placeholder="Category name" class="transactionText">
+  <input id="budget" type="number" placeholder="Budget" step="0.01" min="0" class="transactionText">
+  <button type="button" id="formSubmitButton" class="submitButton" onClick={addCategory()}>Add Category 🤑</button>
+</div>
 
-  Vestibulum morbi blandit cursus risus at ultrices mi. Enim praesent elementum facilisis leo vel fringilla est
-  ullamcorper. Pretium fusce id velit ut tortor pretium viverra suspendisse potenti. Et pharetra pharetra massa massa
-  ultricies mi quis hendrerit. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Donec ac odio tempor orci
-  dapibus. In tellus integer feugiat scelerisque varius morbi. Enim nunc faucibus a pellentesque sit amet porttitor
-  eget. Rhoncus mattis rhoncus urna neque viverra justo nec ultrices dui. Scelerisque felis imperdiet proin fermentum
-  leo vel orci porta. Purus sit amet luctus venenatis lectus magna fringilla. Donec pretium vulputate sapien nec
-  sagittis aliquam. Phasellus vestibulum lorem sed risus. Hendrerit gravida rutrum quisque non. Sem nulla pharetra diam
-  sit amet nisl suscipit. Viverra orci sagittis eu volutpat odio facilisis mauris sit amet. Laoreet sit amet cursus sit
-  amet dictum sit amet. Fringilla est ullamcorper eget nulla. At lectus urna duis convallis convallis. Eget velit
-  aliquet sagittis id consectetur purus.
+<svg onClick={toggleForm()} height="70pt" viewBox="0 0 512 512" width="70pt" class="addButtonFloating"
+  xmlns="http://www.w3.org/2000/svg">
+  <path fill="currentColor"
+    d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm112 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" />
+</svg>
 
-  Viverra ipsum nunc aliquet bibendum enim facilisis. Nisi vitae suscipit tellus mauris a diam maecenas sed. Tortor
-  vitae purus faucibus ornare suspendisse. Vel quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Magna
-  fermentum iaculis eu non diam phasellus vestibulum lorem. Arcu ac tortor dignissim convallis aenean et tortor at. At
-  risus viverra adipiscing at. Ultricies tristique nulla aliquet enim tortor at auctor urna. Tincidunt praesent semper
-  feugiat nibh. Nullam non nisi est sit amet facilisis. Laoreet id donec ultrices tincidunt arcu non sodales. Gravida
-  quis blandit turpis cursus in hac habitasse platea dictumst. Nullam ac tortor vitae purus faucibus. Ut sem viverra
-  aliquet eget. Integer quis auctor elit sed vulputate mi sit. Facilisi cras fermentum odio eu feugiat. Eu feugiat
-  pretium nibh ipsum consequat. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Diam volutpat commodo sed
-  egestas.
+<script>
+  // GET categories
+  function loadCategories() {
+    axios.get('http://localhost:3000/api/get-categories')
+      .then((res) => {
+        res.data.forEach(category => {
+          let table = document.querySelector("#settingsTable");
+          let row = table.insertRow();
+          row.insertCell().innerHTML = category.ID
+          row.insertCell().innerHTML = category.NAME
+          row.insertCell().innerHTML = category.BUDGET
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+  }
 
-  Congue eu consequat ac felis. Vitae justo eget magna fermentum iaculis eu non diam phasellus. Molestie nunc non
-  blandit massa. Condimentum mattis pellentesque id nibh tortor id. Egestas congue quisque egestas diam. Arcu risus quis
-  varius quam. Mauris cursus mattis molestie a. Enim ut tellus elementum sagittis vitae et leo duis. Tempor id eu nisl
-  nunc mi ipsum faucibus vitae aliquet. Diam sit amet nisl suscipit adipiscing bibendum est. Commodo sed egestas egestas
-  fringilla phasellus faucibus. Tristique nulla aliquet enim tortor. Enim facilisis gravida neque convallis a. Sed augue
-  lacus viverra vitae. Faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. Posuere ac ut
-  consequat semper viverra nam libero justo. Urna duis convallis convallis tellus id interdum velit laoreet.
+  function toggleForm() {
+    let form = document.querySelector("#addCategoryForm");
+    if (form.style.display == "none") {
+      form.style.display = "block";
+    } else {
+      form.style.display = "none";
+    }
+  }
 
-  Convallis posuere morbi leo urna molestie at elementum eu facilisis. Quis hendrerit dolor magna eget est lorem ipsum
-  dolor. Sed elementum tempus egestas sed. Tortor condimentum lacinia quis vel eros donec. Purus faucibus ornare
-  suspendisse sed. Porttitor massa id neque aliquam. Luctus accumsan tortor posuere ac ut. Nec feugiat nisl pretium
-  fusce id velit ut tortor. Sed blandit libero volutpat sed cras ornare. Eu facilisis sed odio morbi quis. Ultricies mi
-  eget mauris pharetra et ultrices neque. Volutpat sed cras ornare arcu dui. Rhoncus mattis rhoncus urna neque viverra
-  justo. Aenean euismod elementum nisi quis eleifend.
+  function addCategory() {
+    let nameField = document.querySelector('#name');
+    let budgetField = document.querySelector('#budget');
+    const requestBody = {
+      NAME: nameField.value,
+      BUDGET: budgetField.value
+    }
 
-  Sem viverra aliquet eget sit amet tellus. Cursus euismod quis viverra nibh cras pulvinar mattis nunc sed. Eget velit
-  aliquet sagittis id consectetur purus. Neque aliquam vestibulum morbi blandit cursus risus. Ac odio tempor orci
-  dapibus ultrices in iaculis. Vel turpis nunc eget lorem. Non consectetur a erat nam at lectus. Rutrum tellus
-  pellentesque eu tincidunt tortor. Nisi vitae suscipit tellus mauris. Gravida neque convallis a cras semper. Neque
-  vitae tempus quam pellentesque. Etiam dignissim diam quis enim lobortis scelerisque. In mollis nunc sed id semper
-  risus in hendrerit gravida. In massa tempor nec feugiat nisl pretium fusce id velit. Vitae semper quis lectus nulla.
-  Semper quis lectus nulla at. Sed turpis tincidunt id aliquet risus feugiat in ante.
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
+    let data = new URLSearchParams(requestBody).toString();
+    axios.post('http://localhost:3000/api/add-category', data, config)
+      .then((result) => {
+        // push snackbar success
+        // hide form, 
+        toggleForm();
+        // clear fields, 
+        nameField.value = "";
+        budgetField.value = "";
+        // reload data -> delete all rows but head
+        var mytbl = document.querySelector("#settingsTable");
+        mytbl.getElementsByTagName("tbody")[0].innerHTML = mytbl.rows[0].innerHTML;
+        loadCategories();
+        console.log('success')
+      })
+      .catch((err) => {
+        // push snackbar failure
+        console.log('failure')
+      })
+  }
 
-  Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Quam nulla porttitor massa id neque
-  aliquam. Iaculis eu non diam phasellus. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Et netus et
-  malesuada fames ac turpis. Enim sed faucibus turpis in eu mi bibendum neque. Sed risus ultricies tristique nulla
-  aliquet. Nisi quis eleifend quam adipiscing vitae. Montes nascetur ridiculus mus mauris. Magna sit amet purus gravida.
-  Mi sit amet mauris commodo. Id neque aliquam vestibulum morbi blandit cursus risus at ultrices. Gravida cum sociis
-  natoque penatibus. Duis at consectetur lorem donec massa sapien faucibus et molestie. Quisque non tellus orci ac
-  auctor augue mauris augue neque. Sit amet mattis vulputate enim. Urna nec tincidunt praesent semper feugiat.
-  Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. Amet nulla facilisi morbi tempus iaculis urna id
-  volutpat. Venenatis tellus in metus vulputate eu scelerisque.
-
-  Eu mi bibendum neque egestas congue. Congue quisque egestas diam in arcu cursus euismod. Arcu cursus euismod quis
-  viverra nibh cras pulvinar. Sem integer vitae justo eget magna fermentum iaculis eu non. Posuere ac ut consequat
-  semper viverra nam. In cursus turpis massa tincidunt dui ut ornare lectus. Lectus nulla at volutpat diam ut venenatis
-  tellus in metus. Metus aliquam eleifend mi in nulla posuere sollicitudin. Et malesuada fames ac turpis. Velit egestas
-  dui id ornare arcu odio ut sem nulla. Lacus vel facilisis volutpat est velit egestas dui id ornare. At urna
-  condimentum mattis pellentesque id nibh tortor id. Ultrices tincidunt arcu non sodales neque. Vulputate ut pharetra
-  sit amet. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Etiam non quam lacus suspendisse faucibus
-  interdum posuere lorem ipsum. Rutrum tellus pellentesque eu tincidunt tortor. At in tellus integer feugiat scelerisque
-  varius. In fermentum et sollicitudin ac orci. Non curabitur gravida arcu ac tortor dignissim convallis.
-
-  Non quam lacus suspendisse faucibus interdum posuere. Lectus magna fringilla urna porttitor. Tempor nec feugiat nisl
-  pretium. Cursus in hac habitasse platea dictumst quisque sagittis. Felis eget velit aliquet sagittis id consectetur
-  purus. Morbi enim nunc faucibus a. Libero justo laoreet sit amet cursus sit amet. Ultrices gravida dictum fusce ut
-  placerat orci. Lacus sed turpis tincidunt id aliquet risus feugiat in. Cursus vitae congue mauris rhoncus aenean vel
-  elit scelerisque mauris. Nisl pretium fusce id velit ut tortor pretium viverra. Sed felis eget velit aliquet sagittis
-  id consectetur purus ut. Tellus elementum sagittis vitae et. Arcu vitae elementum curabitur vitae nunc.
-
-  Lacus luctus accumsan tortor posuere ac. Quis varius quam quisque id diam vel quam elementum pulvinar. Volutpat est
-  velit egestas dui. Tempor orci dapibus ultrices in iaculis nunc sed augue lacus. Vel risus commodo viverra maecenas
-  accumsan lacus vel facilisis. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam. Massa vitae tortor
-  condimentum lacinia. Semper viverra nam libero justo laoreet sit amet cursus. Feugiat scelerisque varius morbi enim
-  nunc faucibus a pellentesque. Libero id faucibus nisl tincidunt eget nullam non nisi. Enim diam vulputate ut pharetra
-  sit amet. Fermentum odio eu feugiat pretium nibh ipsum. In pellentesque massa placerat duis ultricies. Enim nunc
-  faucibus a pellentesque. Morbi quis commodo odio aenean sed adipiscing. Adipiscing commodo elit at imperdiet dui
-  accumsan sit amet nulla. Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus.
-
-  Dignissim cras tincidunt lobortis feugiat vivamus at augue eget. Enim ut tellus elementum sagittis vitae. Elit ut
-  aliquam purus sit amet luctus venenatis. Eget mauris pharetra et ultrices neque ornare. Amet purus gravida quis
-  blandit turpis cursus. Nulla porttitor massa id neque. Pellentesque habitant morbi tristique senectus et netus. Ut
-  pharetra sit amet aliquam id. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Turpis egestas sed
-  tempus urna et pharetra.
-
-  Turpis tincidunt id aliquet risus. Consectetur adipiscing elit ut aliquam. Integer vitae justo eget magna fermentum
-  iaculis eu non diam. Mattis enim ut tellus elementum sagittis vitae et leo. Egestas dui id ornare arcu odio ut sem
-  nulla pharetra. Platea dictumst vestibulum rhoncus est pellentesque. Nibh mauris cursus mattis molestie a iaculis at.
-  Nec dui nunc mattis enim ut tellus elementum sagittis. Suscipit tellus mauris a diam maecenas. Elementum nisi quis
-  eleifend quam adipiscing vitae proin sagittis. Diam maecenas sed enim ut sem viverra aliquet eget. Ut diam quam nulla
-  porttitor.
-
-  Arcu felis bibendum ut tristique et egestas quis ipsum. Nulla porttitor massa id neque aliquam vestibulum morbi
-  blandit cursus. Nec nam aliquam sem et tortor consequat id porta nibh. Purus semper eget duis at tellus at urna. Quis
-  ipsum suspendisse ultrices gravida. Imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Diam maecenas sed
-  enim ut sem viverra aliquet eget sit. At in tellus integer feugiat scelerisque varius morbi enim. Mattis aliquam
-  faucibus purus in massa. Morbi tincidunt augue interdum velit euismod in. Tortor pretium viverra suspendisse potenti
-  nullam ac. Augue interdum velit euismod in. Ut aliquam purus sit amet.
-
-  Facilisis sed odio morbi quis commodo. Lobortis elementum nibh tellus molestie. Adipiscing bibendum est ultricies
-  integer. Congue eu consequat ac felis donec et odio. Vitae semper quis lectus nulla at volutpat diam ut. Et egestas
-  quis ipsum suspendisse ultrices gravida dictum fusce. Faucibus ornare suspendisse sed nisi lacus sed viverra. Dolor
-  sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Ut tristique et egestas quis ipsum
-  suspendisse ultrices gravida dictum. Eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Cras adipiscing
-  enim eu turpis egestas pretium aenean pharetra magna. Habitant morbi tristique senectus et netus. Vivamus at augue
-  eget arcu dictum varius duis at. Magna ac placerat vestibulum lectus mauris ultrices eros. Sit amet nisl suscipit
-  adipiscing bibendum est ultricies integer. Varius morbi enim nunc faucibus a pellentesque. Ullamcorper sit amet risus
-  nullam eget. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu. Mauris cursus mattis molestie a iaculis
-  at erat pellentesque.
-
-  Pharetra vel turpis nunc eget. Sem viverra aliquet eget sit amet tellus cras adipiscing enim. Rhoncus mattis rhoncus
-  urna neque viverra justo nec. Orci eu lobortis elementum nibh. Commodo odio aenean sed adipiscing diam donec. Ut
-  tellus elementum sagittis vitae et. Aliquet enim tortor at auctor urna nunc id cursus metus. Viverra ipsum nunc
-  aliquet bibendum enim facilisis gravida. Justo donec enim diam vulputate ut pharetra. Urna cursus eget nunc
-  scelerisque viverra mauris in. A cras semper auctor neque vitae.
-
-  Sed egestas egestas fringilla phasellus faucibus scelerisque eleifend. Mattis ullamcorper velit sed ullamcorper morbi.
-  Lectus nulla at volutpat diam. Vestibulum lorem sed risus ultricies tristique nulla aliquet. Etiam tempor orci eu
-  lobortis. Tincidunt dui ut ornare lectus sit amet est. Aliquet eget sit amet tellus cras adipiscing. Nunc sed velit
-  dignissim sodales ut eu sem. Fermentum leo vel orci porta non pulvinar neque laoreet suspendisse. Et leo duis ut diam
-  quam nulla porttitor massa. Pulvinar etiam non quam lacus suspendisse. Pellentesque adipiscing commodo elit at
-  imperdiet dui accumsan sit. Non diam phasellus vestibulum lorem sed risus. Ullamcorper eget nulla facilisi etiam
-  dignissim diam quis enim lobortis. Massa sapien faucibus et molestie ac feugiat sed lectus vestibulum. Et netus et
-  malesuada fames ac turpis egestas integer eget. Mi bibendum neque egestas congue. Tristique nulla aliquet enim tortor
-  at auctor urna nunc. Elit duis tristique sollicitudin nibh sit. Mattis molestie a iaculis at erat.
-
-  Tristique senectus et netus et malesuada fames ac turpis. Gravida neque convallis a cras semper auctor neque vitae
-  tempus. Sit amet nulla facilisi morbi tempus. A erat nam at lectus. Facilisis sed odio morbi quis commodo. Vestibulum
-  rhoncus est pellentesque elit ullamcorper dignissim cras. Lobortis scelerisque fermentum dui faucibus in. Cum sociis
-  natoque penatibus et magnis dis parturient montes. A pellentesque sit amet porttitor eget dolor morbi. Donec massa
-  sapien faucibus et molestie ac feugiat sed lectus. Ornare massa eget egestas purus viverra accumsan in. Pharetra vel
-  turpis nunc eget lorem dolor sed. Iaculis eu non diam phasellus vestibulum lorem. Eget duis at tellus at urna
-  condimentum mattis pellentesque id. Pulvinar sapien et ligula ullamcorper malesuada proin libero. Tristique senectus
-  et netus et malesuada fames. In hac habitasse platea dictumst quisque sagittis. Scelerisque viverra mauris in aliquam
-  sem fringilla ut morbi tincidunt. Augue ut lectus arcu bibendum.
-
-  Sed adipiscing diam donec adipiscing tristique risus. Volutpat blandit aliquam etiam erat. Integer eget aliquet nibh
-  praesent tristique magna sit amet purus. Malesuada pellentesque elit eget gravida cum. Lacinia at quis risus sed
-  vulputate odio ut. Ut faucibus pulvinar elementum integer enim neque volutpat. Mi eget mauris pharetra et ultrices.
-  Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. Malesuada proin libero nunc consequat interdum
-  varius sit. Maecenas volutpat blandit aliquam etiam erat. Nam at lectus urna duis. Fames ac turpis egestas integer
-  eget aliquet nibh. Mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Sit amet luctus
-  venenatis lectus magna fringilla urna. Nulla facilisi cras fermentum odio eu feugiat pretium nibh ipsum. Arcu dictum
-  varius duis at. Sapien eget mi proin sed libero enim sed faucibus turpis.
-
-  Nisl nisi scelerisque eu ultrices vitae auctor eu. Aliquam ultrices sagittis orci a scelerisque purus semper eget.
-  Mattis aliquam faucibus purus in massa tempor. Non consectetur a erat nam. Bibendum enim facilisis gravida neque.
-  Donec ultrices tincidunt arcu non sodales neque. Vestibulum sed arcu non odio. Aliquam sem et tortor consequat id
-  porta. Lectus nulla at volutpat diam ut venenatis tellus in metus. Sem et tortor consequat id porta nibh venenatis
-  cras.
-
-  Pretium quam vulputate dignissim suspendisse in. Turpis massa tincidunt dui ut ornare lectus. Egestas quis ipsum
-  suspendisse ultrices gravida dictum fusce. Ullamcorper velit sed ullamcorper morbi. Nam at lectus urna duis. Aliquet
-  porttitor lacus luctus accumsan tortor posuere ac. Sit amet porttitor eget dolor morbi. Viverra accumsan in nisl nisi
-  scelerisque. Euismod elementum nisi quis eleifend quam adipiscing vitae. Interdum velit laoreet id donec ultrices
-  tincidunt arcu. A diam maecenas sed enim ut sem viverra. Magna etiam tempor orci eu lobortis elementum nibh. Nec nam
-  aliquam sem et tortor consequat id porta nibh. Massa ultricies mi quis hendrerit dolor magna eget est lorem. Sed
-  blandit libero volutpat sed cras ornare arcu. Faucibus purus in massa tempor nec feugiat nisl pretium. Aliquam sem et
-  tortor consequat id porta. Mattis molestie a iaculis at.</p>
+  loadCategories();
+</script>

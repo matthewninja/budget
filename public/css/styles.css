@@ -28,7 +28,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-  margin-left: 5rem;
   padding: 1rem;
 }
 
@@ -172,6 +171,30 @@ main {
   border: 1px solid #ccc;
 }
 
+.settingsTable {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.settingsTable td {
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.settingsTable th {
+  background-color: #5cdb95;
+  color: white;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.settingsTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
 select {
   box-sizing: content-box;
 }
@@ -191,6 +214,33 @@ select {
 
 .submitButton:hover {
   background-color: #379683;
+}
+
+.addButtonFloating {
+  color: #5cdb95;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 50;
+  transition: var(--transition-speed);
+  cursor: pointer;
+}
+
+.addButtonFloating :hover {
+  color: #379683;
+  transition: var(--transition-speed);
+}
+
+#addCategoryForm {
+  width: 50%;
+  text-align: center;
+  position: fixed;
+  left: 25%;
+  top: 8%;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background-color: lightgrey;
+  padding-bottom: 2rem;
 }
 
 /* Small screens */
@@ -226,6 +276,10 @@ select {
   }
 
   .center {
+    width: 90%;
+  }
+
+  #addCategoryForm {
     width: 90%;
   }
 }
