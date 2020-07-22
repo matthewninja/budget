@@ -245,22 +245,24 @@ select {
 
 .progressBar {
   width: 100%;
-  background-color: lightblue;
-  border-radius: 13px;
+  background-color: lightgrey;
   border: 1px solid #000;
-  /* (height of inner div) / 2 + padding */
+  border-radius: 16px;
+  /* border-radius = (height of inner div) / 2 + padding */
   padding: 3px;
+  margin-bottom: 10px;
 }
 
 .progress {
-  background-color: green;
-  width: 40%;
-  height: 20px;
-  border-radius: 10px;
+  background-color: lightgreen;
+  width: 0%;
+  height: 26px;
+  border-radius: 16px;
 }
 
 .progressBarText {
   padding-left: 1rem;
+  white-space: nowrap;
 }
 
 /* Small screens */

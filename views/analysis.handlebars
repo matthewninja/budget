@@ -1,11 +1,9 @@
-<div class="center">
+<div class="center" id="analysis">
   <h1>Analysis 📈</h1>
   <p>List each category with the budget and current spend on each</p>
   <p>An "exp" bar that fills up as I use the budget for the month</p>
+  <p>Also, an exp bar for total spend vs total budget</p>
   <p>For each category, click it and it drops down to show each transaction</p>
-  <div class="progressBar">
-    <div class="progress"><span class="progressBarText">hello world</span></div>
-  </div>
 </div>
 
 <script>
@@ -13,7 +11,9 @@
   function loadCategories() {
     axios.get('http://localhost:3000/api/get-categories')
       .then((res) => {
-        return res.data;
+        let categories = res.data;
+
+        loadTransactions(categories);
       })
       .catch((err) => {
         console.log(err)
@@ -21,21 +21,40 @@
   }
 
   // GET transactions
-  function loadTransactions() {
+  function loadTransactions(categories) {
     axios.get('http://localhost:3000/api/get-transactions')
       .then((res) => {
-        return res.data;
+        // categories are passed in.
+        // Sum transactions for each category
+        let transactions = res.data;
+        for (c of categories) c.spend = 0;
+        for (t of transactions) {
+          pos = categories.map(e => { return e.ID; }).indexOf(t.CATEGORY); // find index of category
+          categories[pos].spend += t.AMOUNT;
+        }
+        console.table(categories);
+
+        categories.forEach(category => {
+          let div = document.createElement("div");
+          div.setAttribute("class", "progressBar");
+          let div2 = document.createElement("div");
+          div2.setAttribute("class", "progress");
+          div2.setAttribute("style", `width: ${100 * category.spend / category.BUDGET}%`);
+          let span = document.createElement("span");
+          span.innerHTML = `${category.NAME}: ${category.spend}/${category.BUDGET}`;
+          span.setAttribute("class", "progressBarText");
+          div2.appendChild(span);
+          div.appendChild(div2);
+
+          let analysis = document.querySelector("#analysis");
+          analysis.appendChild(div);
+        });
+
       })
       .catch((err) => {
         console.log(err)
       });
   }
 
-  // Initialize analysis
-  function initialize() {
-    let categories = loadCategories();
-    let transactions = loadTransactions();
-  }
-
-  initialize();
+  loadCategories();
 </script>
