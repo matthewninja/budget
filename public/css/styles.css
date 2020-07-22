@@ -161,6 +161,7 @@ main {
   margin: auto;
   width: 50%;
   padding: 10px;
+  text-align: center;
 }
 
 .transactionText {
@@ -197,6 +198,9 @@ main {
 
 select {
   box-sizing: content-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .submitButton {
