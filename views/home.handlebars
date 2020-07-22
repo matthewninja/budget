@@ -11,7 +11,7 @@
 
   <input id="date" type="date" class="transactionText"><br>
 
-  <button type="button" class="submitButton" onClick={addTransaction()}>Submit</button>
+  <button type="button" class="submitButton" id="submitButton" onClick={addTransaction()}>Submit</button>
 </div>
 
 <script>
@@ -37,13 +37,23 @@
     });
 
   function addTransaction() {
+    let name = document.querySelector('#name');
+    let category = document.querySelector('#category');
+    let amount = document.querySelector('#amount');
+    let description = document.querySelector('#description');
+    let date = document.querySelector('#date');
+    let submit = document.querySelector('#submitButton');
+    let inputs = [name, category, amount, description, date];
+
     const requestBody = {
-      NAME: document.querySelector('#name').value,
-      CATEGORY: document.querySelector('#category').value,
-      AMOUNT: document.querySelector('#amount').value,
-      DESCRIPTION: document.querySelector('#description').value,
-      DATE: document.querySelector('#date').value
+      NAME: name.value,
+      CATEGORY: category.value,
+      AMOUNT: amount.value,
+      DESCRIPTION: description.value,
+      DATE: date.value
     }
+
+    toggleInputs(inputs); // disable inputs
 
     const config = {
       headers: {
@@ -54,11 +64,39 @@
     axios.post('http://localhost:3000/api/add-transaction', data, config)
       .then((result) => {
         // push snackbar success
-        console.log('success')
+        snackbar("Transaction added ✅");
+        toggleInputs(inputs); // enable inputs
       })
       .catch((err) => {
         // push snackbar failure
-        console.log('failure')
+        snackbar("Error ⚠️");
+        toggleInputs(inputs); // enable inputs
       })
+  }
+
+  function toggleInputs(elements) {
+    for (e of elements) {
+      if (e.disabled === false) {
+        e.disabled = true;
+      } else {
+        // if not date, category, or submit button, clear value
+        if (e.id !== "date" && e.id !== "category" && e.id !== "submitButton")
+          e.value = "";
+        e.disabled = false;
+
+      }
+    }
+  }
+
+  function snackbar(text) {
+    // Get the snackbar DIV
+    let sb = document.querySelector("#snackbar");
+
+    // Add the "show" class to DIV
+    sb.innerHTML = text;
+    sb.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function () { sb.className = sb.className.replace("show", ""); }, 3000);
   }
 </script>
