@@ -31,6 +31,7 @@
         for (t of transactions) {
           pos = categories.map(e => { return e.ID; }).indexOf(t.CATEGORY); // find index of category
           categories[pos].spend += t.AMOUNT;
+          // add transaction to the table under that category
         }
 
         categories.forEach(category => {
@@ -40,7 +41,7 @@
           div2.setAttribute("class", "progress");
           div2.setAttribute("style", `width: ${100 * category.spend / category.BUDGET}%`);
           let span = document.createElement("span");
-          span.innerHTML = `${category.NAME}: ${(category.spend).toFixed(2)}/${(category.BUDGET).toFixed(2)}`;
+          span.innerHTML = `${category.NAME}: $${(category.spend).toFixed(0)}/$${(category.BUDGET).toFixed(0)}`;
           span.setAttribute("class", "progressBarText");
           div2.appendChild(span);
           div.appendChild(div2);
